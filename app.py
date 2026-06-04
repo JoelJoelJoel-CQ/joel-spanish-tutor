@@ -8,7 +8,7 @@ import random
 # 請在 Google AI Studio 獲取你的 API Key
 os_api_key = st.secrets["GOOGLE_API_KEY"]
 genai.configure(api_key=os_api_key)
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('models/gemini-1.5-flash')
 
 # --- 初始化 Session State (用於記錄學習內容) ---
 if 'history' not in st.session_state:
