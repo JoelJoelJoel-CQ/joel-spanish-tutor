@@ -5,10 +5,19 @@ import io
 import random
 
 # --- 設定 Google AI API ---
-# 請在 Google AI Studio 獲取你的 API Key
-os_api_key = st.secrets["GOOGLE_API_KEY"]
+import os
+
+# 從 Streamlit Secrets 讀取 API Key
+if "GOOGLE_API_KEY" in st.secrets:
+    os_api_key = st.secrets["GOOGLE_API_KEY"]
+else:
+    st.error("找不到 API Key，請檢查 Streamlit Cloud 的 Secrets 設定。")
+    st.stop()
+
 genai.configure(api_key=os_api_key)
-model = genai.GenerativeModel('models/gemini-1.5-flash')
+
+# 使用更嚴謹的模型名稱格式
+model = genai.GenerativeModel('models/gemini-1.5-flash-latest')
 
 # --- 初始化 Session State (用於記錄學習內容) ---
 if 'history' not in st.session_state:
